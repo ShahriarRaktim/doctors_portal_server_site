@@ -22,7 +22,7 @@ const client = new MongoClient(uri, {
 });
 
 async function verifyToken(req, res, next) {
-  if (req.headers.authorization.startsWith("Bearer ")) {
+  if (req?.headers?.authorization?.startsWith("Bearer ")) {
     const token = req.headers.authorization.split(" ")[1];
 
     try {
@@ -62,7 +62,7 @@ async function run() {
       const query = { email: email };
       const user = await usersCollection.findOne(query);
       let isAdmin = false;
-      if (user.role === "admin") {
+      if (user?.role === "admin") {
         isAdmin = true;
       }
       res.json({ admin: isAdmin });
